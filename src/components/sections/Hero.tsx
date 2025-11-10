@@ -194,6 +194,8 @@ const Hero = () => {
                   src="/bsgengine.png"
                   alt="BshEngine Screenshot"
                   className="w-full h-auto object-contain"
+                  width="566"
+                  height="292"
                   loading="eager"
                   decoding="async"
                 />
