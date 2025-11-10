@@ -126,7 +126,7 @@ export const features: Feature[] = [
   {
     icon: GitMergeIcon,
     title: 'Triggers',
-    description: 'Event-driven automation with webhooks, conditional logic, and chaining.',
+    description: 'Trigger your enities changes and perform actions based on the changes.',
     color: 'from-fuchsia-500 to-pink-600',
     iconBg: 'from-fuchsia-50 to-pink-50',
     category: 'Automation',
