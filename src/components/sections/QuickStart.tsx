@@ -1,119 +1,160 @@
-import { FaDocker, FaBook, FaGithub, FaCheck } from 'react-icons/fa'
-
-const steps = [
-  {
-    number: 1,
-    title: 'Pull the Docker Image',
-    description: 'Get the latest BSH Engine image from Docker Hub',
-    code: 'docker pull bshengine/bshengine:latest'
-  },
-  {
-    number: 2,
-    title: 'Configure & Run',
-    description: 'Set up your docker-compose.yml and environment variables',
-    code: 'docker-compose up -d'
-  },
-  {
-    number: 3,
-    title: 'Start Building',
-    description: 'Access the API at http://localhost:7071 and start creating entities',
-    code: 'curl http://localhost:7071/api/health'
-  }
-]
+import { motion } from 'framer-motion'
+import { Terminal, ArrowRight, Book, Github, Package } from 'lucide-react'
 
 const QuickStart = () => {
+  const steps = [
+    {
+      number: '01',
+      title: 'Pull Docker Image',
+      description: 'Get the latest BSH Engine image from Docker Hub',
+      code: 'docker pull bsh-engine:latest',
+      icon: Package,
+    },
+    {
+      number: '02',
+      title: 'Configure & Run',
+      description: 'Set up your environment variables and start the container',
+      code: 'docker-compose up -d',
+      icon: Terminal,
+    },
+    {
+      number: '03',
+      title: 'Start Building',
+      description: 'Access the API at localhost:7071 and begin creating entities',
+      code: 'curl http://localhost:7071/health',
+      icon: ArrowRight,
+    },
+  ]
+
+  const resources = [
+    { name: 'Documentation', icon: Book, href: '#' },
+    { name: 'GitHub Repository', icon: Github, href: '#' },
+    { name: 'Docker Hub', icon: Package, href: '#' },
+  ]
+
   return (
-    <section id="quick-start" className="section-container bg-white">
-      <div className="text-center mb-16">
-        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-          Get Started in 3 Steps
-        </h2>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-          Have your backend running in minutes
-        </p>
-      </div>
-
-      <div className="max-w-4xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-          {steps.map((step) => (
-            <div
-              key={step.number}
-              className="relative bg-white p-6 rounded-xl border-2 border-primary-200 shadow-md"
-            >
-              <div className="absolute -top-4 -left-4 w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-lg">
-                {step.number}
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3 mt-2">
-                {step.title}
-              </h3>
-              <p className="text-gray-600 mb-4">{step.description}</p>
-              <div className="bg-gray-900 rounded-lg p-4">
-                <code className="text-gray-100 text-sm font-mono">
-                  {step.code}
-                </code>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="bg-gradient-to-r from-primary-600 to-primary-700 rounded-xl p-8 text-white text-center">
-          <h3 className="text-2xl font-bold mb-4">Ready to Get Started?</h3>
-          <p className="text-primary-100 mb-6 text-lg">
-            Check out our documentation for detailed setup instructions and API reference
+    <section id="quick-start" className="relative py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900 to-gray-950">
+      <div className="max-w-7xl mx-auto">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <span className="text-white">Get Started in </span>
+            <span className="text-gradient">3 Simple Steps</span>
+          </h2>
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            Have your backend running in minutes, not hours
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <a
-              href="https://hub.docker.com/r/bshengine/bshengine"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-3 bg-white text-primary-600 rounded-lg font-semibold hover:bg-primary-50 transition-colors flex items-center gap-2"
-            >
-              <FaDocker className="inline" />
-              Docker Hub
-            </a>
-            <a
-              href="#"
-              className="px-6 py-3 bg-primary-800 text-white rounded-lg font-semibold hover:bg-primary-900 transition-colors flex items-center gap-2"
-            >
-              <FaBook className="inline" />
-              Documentation
-            </a>
-            <a
-              href="https://github.com/bshengine/bshengine"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-3 bg-primary-800 text-white rounded-lg font-semibold hover:bg-primary-900 transition-colors flex items-center gap-2"
-            >
-              <FaGithub className="inline" />
-              GitHub
-            </a>
-          </div>
+        </motion.div>
+
+        {/* Steps */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          {steps.map((step, index) => {
+            const Icon = step.icon
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                className="relative group"
+              >
+                {/* Connection Line (Desktop) */}
+                {index < steps.length - 1 && (
+                  <div className="hidden md:block absolute top-12 left-full w-full h-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 z-0" style={{ width: 'calc(100% - 4rem)' }} />
+                )}
+
+                <div className="relative glass rounded-2xl p-8 border border-white/10 hover:border-white/20 transition-all hover:bg-white/5">
+                  {/* Step Number */}
+                  <div className="absolute -top-4 -left-4 w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-2xl font-bold text-white shadow-lg">
+                    {step.number}
+                  </div>
+
+                  {/* Icon */}
+                  <div className="mb-6 mt-4">
+                    <div className="inline-flex p-4 rounded-xl bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-500/30">
+                      <Icon className="w-6 h-6 text-blue-400" />
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <h3 className="text-xl font-bold text-white mb-2">{step.title}</h3>
+                  <p className="text-gray-400 mb-4">{step.description}</p>
+
+                  {/* Code Block */}
+                  <div className="relative bg-gray-900 rounded-lg p-4 border border-gray-800 overflow-x-auto">
+                    <pre className="text-sm font-mono text-gray-300">
+                      <code>{step.code}</code>
+                    </pre>
+                  </div>
+                </div>
+              </motion.div>
+            )
+          })}
         </div>
 
-        <div className="mt-12 bg-gray-50 rounded-xl p-8">
-          <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-            What You Get Out of the Box
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {[
-              'REST API with full CRUD operations',
-              'User authentication & authorization',
-              'Role-based access control',
-              'Advanced search & filtering',
-              'File upload & management',
-              'Email sending system',
-              'Entity auditing & tracking',
-              'API key management',
-              'Postman collection',
-              'TypeScript type definitions'
-            ].map((feature, index) => (
-              <div key={index} className="flex items-center gap-3">
-                <FaCheck className="text-primary-600 flex-shrink-0" />
-                <span className="text-gray-700">{feature}</span>
-              </div>
-            ))}
+        {/* CTA Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="text-center"
+        >
+          <div className="glass rounded-2xl p-12 border border-white/10">
+            <h3 className="text-3xl font-bold text-white mb-4">
+              Ready to Build?
+            </h3>
+            <p className="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
+              Join developers who are already building faster with BSH Engine
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+              <motion.a
+                href="#"
+                className="px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl font-semibold text-lg flex items-center space-x-2 hover:shadow-2xl hover:shadow-blue-500/50 transition-all"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span>View Documentation</span>
+                <ArrowRight className="w-5 h-5" />
+              </motion.a>
+              <motion.a
+                href="#"
+                className="px-8 py-4 glass text-white rounded-xl font-semibold text-lg flex items-center space-x-2 hover:bg-white/10 transition-all border border-white/20"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Github className="w-5 h-5" />
+                <span>View on GitHub</span>
+              </motion.a>
+            </div>
+
+            {/* Resource Links */}
+            <div className="flex flex-wrap justify-center gap-4">
+              {resources.map((resource, index) => {
+                const ResourceIcon = resource.icon
+                return (
+                  <motion.a
+                    key={index}
+                    href={resource.href}
+                    className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-gray-300 hover:text-white"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <ResourceIcon className="w-4 h-4" />
+                    <span className="text-sm font-medium">{resource.name}</span>
+                  </motion.a>
+                )
+              })}
+            </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

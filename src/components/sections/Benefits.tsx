@@ -1,78 +1,151 @@
-import { 
-  FaClock, 
-  FaCode, 
-  FaRocket, 
-  FaShieldAlt, 
-  FaChartLine,
-  FaCheckCircle
-} from 'react-icons/fa'
-
-interface Benefit {
-  icon: React.ReactNode
-  title: string
-  description: string
-}
-
-const benefits: Benefit[] = [
-  {
-    icon: <FaClock className="w-8 h-8" />,
-    title: 'Save Development Time',
-    description: 'Eliminate weeks of boilerplate code. Focus on building features that matter to your users.'
-  },
-  {
-    icon: <FaCode className="w-8 h-8" />,
-    title: 'No Boilerplate Code',
-    description: 'No need to write CRUD endpoints, authentication, or search logic. It\'s all built-in and ready to use.'
-  },
-  {
-    icon: <FaRocket className="w-8 h-8" />,
-    title: 'Focus on Business Logic',
-    description: 'Spend your time solving business problems, not reinventing the wheel with infrastructure code.'
-  },
-  {
-    icon: <FaShieldAlt className="w-8 h-8" />,
-    title: 'Production-Ready Features',
-    description: 'Security, authentication, authorization, and audit trails are built-in from day one.'
-  },
-  {
-    icon: <FaChartLine className="w-8 h-8" />,
-    title: 'Scalable Architecture',
-    description: 'Built on proven technologies. Scale your backend as your application grows.'
-  },
-  {
-    icon: <FaCheckCircle className="w-8 h-8" />,
-    title: 'Rapid Prototyping',
-    description: 'Get from idea to working API in minutes. Perfect for MVPs and proof-of-concepts.'
-  }
-]
+import { motion } from 'framer-motion'
+import { CheckCircle2, Zap, Shield, Code2, TrendingUp } from 'lucide-react'
 
 const Benefits = () => {
-  return (
-    <section className="section-container bg-gradient-to-br from-primary-50 to-white">
-      <div className="text-center mb-16">
-        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-          Why Choose BSH Engine?
-        </h2>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-          Accelerate your backend development and ship faster
-        </p>
-      </div>
+  const benefits = [
+    {
+      icon: Zap,
+      title: 'Lightning Fast Setup',
+      description: 'Get your backend running in minutes with Docker. No complex configuration needed.',
+      gradient: 'from-yellow-500 to-orange-500',
+    },
+    {
+      icon: Code2,
+      title: 'Zero Boilerplate',
+      description: 'Focus on your business logic, not infrastructure. We handle the rest.',
+      gradient: 'from-blue-500 to-cyan-500',
+    },
+    {
+      icon: Shield,
+      title: 'Enterprise Security',
+      description: 'Built-in authentication, RBAC, and audit trails. Production-ready from day one.',
+      gradient: 'from-green-500 to-emerald-500',
+    },
+    {
+      icon: TrendingUp,
+      title: 'Scalable Architecture',
+      description: 'Designed to grow with your needs. Handle millions of requests effortlessly.',
+      gradient: 'from-purple-500 to-pink-500',
+    },
+  ]
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {benefits.map((benefit, index) => (
-          <div
-            key={index}
-            className="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-          >
-            <div className="text-primary-600 mb-4">{benefit.icon}</div>
-            <h3 className="text-xl font-bold text-gray-900 mb-3">
-              {benefit.title}
-            </h3>
-            <p className="text-gray-600 leading-relaxed">
-              {benefit.description}
-            </p>
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+      },
+    },
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: -30 },
+    visible: { opacity: 1, x: 0 },
+  }
+
+  return (
+    <section className="relative py-24 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <span className="text-white">Why Choose </span>
+            <span className="text-gradient">BSH Engine</span>
+          </h2>
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            Built for developers who want to ship faster, not configure more
+          </p>
+        </motion.div>
+
+        {/* Benefits Grid */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16"
+        >
+          {benefits.map((benefit, index) => {
+            const Icon = benefit.icon
+            return (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="group relative glass rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-white/20"
+              >
+                {/* Gradient Background */}
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${benefit.gradient} opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity duration-300`}
+                />
+
+                <div className="relative z-10">
+                  {/* Icon */}
+                  <div className="mb-6">
+                    <div className={`inline-flex p-4 rounded-xl bg-gradient-to-br ${benefit.gradient} bg-opacity-20`}>
+                      <Icon className="w-8 h-8 text-white" />
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-cyan-400 transition-all">
+                    {benefit.title}
+                  </h3>
+                  <p className="text-gray-400 text-lg leading-relaxed">
+                    {benefit.description}
+                  </p>
+                </div>
+              </motion.div>
+            )
+          })}
+        </motion.div>
+
+        {/* Key Points */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="glass rounded-2xl p-8 border border-white/10"
+        >
+          <h3 className="text-2xl font-bold text-white mb-6 text-center">
+            Everything You Need
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              'Docker-based deployment',
+              'PostgreSQL support',
+              'RESTful APIs',
+              'JWT Authentication',
+              'Advanced search',
+              'File management',
+              'Email system',
+              'RBAC & permissions',
+              'Audit trails',
+              'Postman collection',
+              'TypeScript SDK',
+              'Full documentation',
+            ].map((point, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+                className="flex items-center space-x-3"
+              >
+                <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0" />
+                <span className="text-gray-300">{point}</span>
+              </motion.div>
+            ))}
           </div>
-        ))}
+        </motion.div>
       </div>
     </section>
   )

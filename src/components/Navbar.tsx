@@ -1,97 +1,122 @@
-import { useState } from 'react'
-import { FaBars, FaTimes } from 'react-icons/fa'
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Menu, X, Code2 } from 'lucide-react'
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const navLinks = [
+    { name: 'Features', href: '#features' },
+    { name: 'Quick Start', href: '#quick-start' },
+    { name: 'Docs', href: '#', external: true },
+  ]
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-sm z-50">
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? 'glass border-b border-white/10 shadow-lg'
+          : 'bg-transparent'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex items-center">
-            <span className="text-2xl font-bold gradient-text">BSH Engine</span>
-          </div>
-          
-          {/* Desktop Menu */}
+        <div className="flex items-center justify-between h-16 md:h-20">
+          {/* Logo */}
+          <motion.a
+            href="#"
+            className="flex items-center space-x-2 group"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <div className="relative">
+              <Code2 className="w-8 h-8 text-blue-400 group-hover:text-cyan-400 transition-colors" />
+              <div className="absolute inset-0 bg-blue-400/20 blur-xl rounded-full group-hover:bg-cyan-400/30 transition-colors" />
+            </div>
+            <span className="text-xl font-bold text-gradient">BSH Engine</span>
+          </motion.a>
+
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#features" className="text-gray-700 hover:text-primary-600 transition-colors">
-              Features
-            </a>
-            <a href="#capabilities" className="text-gray-700 hover:text-primary-600 transition-colors">
-              Capabilities
-            </a>
-            <a href="#examples" className="text-gray-700 hover:text-primary-600 transition-colors">
-              Examples
-            </a>
-            <a href="#quick-start" className="text-gray-700 hover:text-primary-600 transition-colors">
-              Quick Start
-            </a>
-            <a
-              href="https://github.com/bshengine/bshengine"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-gray-300 hover:text-white transition-colors font-medium text-sm relative group"
+              >
+                {link.name}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 group-hover:w-full transition-all duration-300" />
+              </a>
+            ))}
+            <motion.a
+              href="#"
+              className="px-6 py-2.5 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg font-semibold text-sm hover:shadow-lg hover:shadow-blue-500/50 transition-all"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              GitHub
-            </a>
+              Get Started
+            </motion.a>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 hover:text-primary-600"
-              aria-label="Toggle menu"
-            >
-              {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-            </button>
-          </div>
+          <button
+            className="md:hidden text-gray-300 hover:text-white transition-colors"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
+          </button>
         </div>
-
-        {/* Mobile Menu */}
-        {isOpen && (
-          <div className="md:hidden pb-4 space-y-2">
-            <a
-              href="#features"
-              className="block py-2 text-gray-700 hover:text-primary-600"
-              onClick={() => setIsOpen(false)}
-            >
-              Features
-            </a>
-            <a
-              href="#capabilities"
-              className="block py-2 text-gray-700 hover:text-primary-600"
-              onClick={() => setIsOpen(false)}
-            >
-              Capabilities
-            </a>
-            <a
-              href="#examples"
-              className="block py-2 text-gray-700 hover:text-primary-600"
-              onClick={() => setIsOpen(false)}
-            >
-              Examples
-            </a>
-            <a
-              href="#quick-start"
-              className="block py-2 text-gray-700 hover:text-primary-600"
-              onClick={() => setIsOpen(false)}
-            >
-              Quick Start
-            </a>
-            <a
-              href="https://github.com/bshengine/bshengine"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block py-2 px-4 bg-primary-600 text-white rounded-lg hover:bg-primary-700 text-center"
-              onClick={() => setIsOpen(false)}
-            >
-              GitHub
-            </a>
-          </div>
-        )}
       </div>
-    </nav>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden glass border-t border-white/10"
+          >
+            <div className="px-4 py-4 space-y-4">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="block text-gray-300 hover:text-white transition-colors font-medium"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.name}
+                </a>
+              ))}
+              <motion.a
+                href="#"
+                className="block px-6 py-2.5 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg font-semibold text-center"
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Get Started
+              </motion.a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   )
 }
 

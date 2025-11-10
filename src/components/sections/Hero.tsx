@@ -1,76 +1,121 @@
-import { FaDocker, FaBook, FaRocket } from 'react-icons/fa'
+import { motion } from 'framer-motion'
+import { ArrowRight, Play, Code2, Zap, Database } from 'lucide-react'
 
 const Hero = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  }
+
   return (
-    <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary-50 via-white to-primary-50">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6">
-            Start Your Backend
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="text-center"
+        >
+          {/* Badge */}
+          <motion.div variants={itemVariants} className="mb-6">
+            <span className="inline-flex items-center px-4 py-2 rounded-full glass text-sm font-medium text-cyan-400 border border-cyan-400/20">
+              <Zap className="w-4 h-4 mr-2" />
+              Backend-as-a-Service Platform
+            </span>
+          </motion.div>
+
+          {/* Main Headline */}
+          <motion.h1
+            variants={itemVariants}
+            className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight"
+          >
+            <span className="text-white">Build APIs</span>
             <br />
-            <span className="gradient-text">In Minutes, Not Days</span>
-          </h1>
-          
-          <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto">
-            BSH Engine is a powerful backend-as-a-service platform that eliminates boilerplate code 
-            and accelerates development. Just run a Docker image and you're ready to go.
-          </p>
+            <span className="text-gradient">Effortlessly</span>
+          </motion.h1>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <a
+          {/* Subheadline */}
+          <motion.p
+            variants={itemVariants}
+            className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed"
+          >
+            A powerful backend tool that helps developers start and scale their backend with ease.
+            <br className="hidden md:block" />
+            <span className="text-gray-300"> Eliminate boilerplate code and accelerate backend development.</span>
+          </motion.p>
+
+          {/* CTA Buttons */}
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
+          >
+            <motion.a
               href="#quick-start"
-              className="px-8 py-4 bg-primary-600 text-white rounded-lg text-lg font-semibold hover:bg-primary-700 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center gap-2"
+              className="group px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl font-semibold text-lg flex items-center space-x-2 hover:shadow-2xl hover:shadow-blue-500/50 transition-all glow"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <FaRocket className="inline" />
-              Get Started
-            </a>
-            <a
-              href="https://hub.docker.com/r/bshengine/bshengine"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-4 bg-white text-primary-600 rounded-lg text-lg font-semibold border-2 border-primary-600 hover:bg-primary-50 transition-all transform hover:scale-105 flex items-center gap-2"
-            >
-              <FaDocker className="inline" />
-              Docker Hub
-            </a>
-            <a
+              <span>Get Started</span>
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </motion.a>
+            <motion.a
               href="#"
-              className="px-8 py-4 bg-gray-100 text-gray-700 rounded-lg text-lg font-semibold hover:bg-gray-200 transition-all flex items-center gap-2"
+              className="px-8 py-4 glass text-white rounded-xl font-semibold text-lg flex items-center space-x-2 hover:bg-white/10 transition-all border border-white/20"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <FaBook className="inline" />
-              View Docs
-            </a>
-          </div>
+              <Play className="w-5 h-5" />
+              <span>View Documentation</span>
+            </motion.a>
+          </motion.div>
 
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-xl shadow-2xl p-6 border border-gray-200">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                <span className="ml-4 text-sm text-gray-500 font-mono">docker-compose.yml</span>
-              </div>
-              <pre className="code-block text-left">
-                <code>{`version: '3.8'
-services:
-  bshengine:
-    image: bshengine/bshengine:latest
-    ports:
-      - "7071:7071"
-    environment:
-      - DATABASE_URL=postgresql://user:pass@db:5432/dbname
-    depends_on:
-      - db
-  db:
-    image: postgres:15
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: pass
-      POSTGRES_DB: dbname`}</code>
-              </pre>
+          {/* Feature Pills */}
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-wrap items-center justify-center gap-4 text-sm"
+          >
+            <div className="flex items-center space-x-2 glass px-4 py-2 rounded-lg">
+              <Database className="w-4 h-4 text-blue-400" />
+              <span className="text-gray-300">Docker-based</span>
             </div>
+            <div className="flex items-center space-x-2 glass px-4 py-2 rounded-lg">
+              <Code2 className="w-4 h-4 text-cyan-400" />
+              <span className="text-gray-300">RESTful APIs</span>
+            </div>
+            <div className="flex items-center space-x-2 glass px-4 py-2 rounded-lg">
+              <Zap className="w-4 h-4 text-teal-400" />
+              <span className="text-gray-300">Zero Boilerplate</span>
+            </div>
+          </motion.div>
+        </motion.div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, repeat: Infinity, repeatType: 'reverse', duration: 2 }}
+          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+        >
+          <div className="w-6 h-10 border-2 border-gray-600 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-gradient-to-b from-blue-400 to-cyan-400 rounded-full mt-2 animate-bounce" />
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )
