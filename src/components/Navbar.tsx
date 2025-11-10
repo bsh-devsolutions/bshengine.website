@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { currentAnnouncement } from '../data/announcement'
+import { navLinks, getStartedLink } from '../data/navLinks'
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -43,11 +44,6 @@ const Navbar = () => {
     }
   }, [])
 
-  const navLinks = [
-    { name: 'Features', href: '#features' },
-    { name: 'Quick Start', href: '#quick-start' },
-    { name: 'Docs', href: 'https://docs.bousalih.com', external: true },
-  ]
 
   return (
     <motion.nav
@@ -90,7 +86,7 @@ const Navbar = () => {
               </a>
             ))}
             <motion.a
-              href="#"
+              href={getStartedLink}
               className="px-6 py-2.5 bg-gray-900 text-white rounded-lg font-semibold text-sm hover:bg-gray-800 hover:shadow-lg transition-all"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -135,7 +131,7 @@ const Navbar = () => {
                 </a>
               ))}
               <motion.a
-                href="#"
+                href={getStartedLink}
                 className="block px-6 py-2.5 bg-gray-900 text-white rounded-lg font-semibold text-center hover:bg-gray-800"
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsMobileMenuOpen(false)}

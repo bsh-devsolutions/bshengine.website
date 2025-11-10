@@ -1,45 +1,13 @@
 import { motion } from 'framer-motion'
-import { Terminal, ArrowRight, Book, Github, Package, ChevronRight } from 'lucide-react'
+import { ArrowRight, Github, ChevronRight } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
+import { quickStartSteps, quickStartResources, quickStartCTA } from '@/data/quickStart'
 
 const QuickStart = () => {
-  const steps = [
-    {
-      number: '01',
-      title: 'Pull Docker Image',
-      description: 'Get the latest BSH Engine image from Docker Hub',
-      code: 'docker pull bshg/engine:latest',
-      icon: Package,
-      gradient: 'from-blue-500 to-indigo-600',
-      iconBg: 'from-blue-50 to-indigo-50',
-    },
-    {
-      number: '02',
-      title: 'Configure & Run',
-      description: 'Set up your environment variables and start the container',
-      code: 'docker-compose up -d',
-      icon: Terminal,
-      gradient: 'from-purple-500 to-pink-600',
-      iconBg: 'from-purple-50 to-pink-50',
-    },
-    {
-      number: '03',
-      title: 'Start Building',
-      description: 'Access the API at localhost:7071 and begin creating entities',
-      code: 'curl http://localhost:7071/health',
-      icon: ArrowRight,
-      gradient: 'from-emerald-500 to-teal-600',
-      iconBg: 'from-emerald-50 to-teal-50',
-    },
-  ]
-
-  const resources = [
-    { name: 'Documentation', icon: Book, href: 'https://docs.bousalih.com' },
-    { name: 'GitHub Repository', icon: Github, href: 'https://github.com/bshgenerator' },
-    { name: 'Docker Hub', icon: Package, href: 'https://hub.docker.com/r/bshg/engine' },
-  ]
+  const steps = quickStartSteps
+  const resources = quickStartResources
 
   return (
     <section id="quick-start" className="relative py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -216,28 +184,28 @@ const QuickStart = () => {
             
             <CardContent className="p-12 relative z-10">
               <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 tracking-tight">
-                Ready to Build?
+                {quickStartCTA.title}
               </h3>
               <p className="text-gray-600 text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
-                Join developers who are already building faster with BSH Engine
+                {quickStartCTA.description}
               </p>
               
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
                 <motion.a
-                  href="https://docs.bousalih.com/docs/bsh-engine"
+                  href={quickStartCTA.primaryButton.href}
                   target="_blank"
                   className="relative group/btn px-8 py-4 bg-gradient-to-r from-gray-900 to-gray-800 text-white rounded-xl font-semibold text-lg flex items-center space-x-2 overflow-hidden"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-gray-800 to-gray-700 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
-                  <span className="relative z-10">View Documentation</span>
+                  <span className="relative z-10">{quickStartCTA.primaryButton.text}</span>
                   <ArrowRight className="w-5 h-5 relative z-10 group-hover/btn:translate-x-1 transition-transform duration-300" />
                   <div className="absolute inset-0 bg-white/10 opacity-0 group-hover/btn:opacity-100 blur-xl transition-opacity duration-300" />
                 </motion.a>
                 
                 <motion.a
-                  href="https://github.com/bshgenerator"
+                  href={quickStartCTA.secondaryButton.href}
                   target="_blank"
                   className="relative group/btn px-8 py-4 bg-white/90 backdrop-blur-sm text-gray-900 rounded-xl font-semibold text-lg flex items-center space-x-2 border-2 border-gray-200 hover:border-gray-300 transition-all overflow-hidden"
                   whileHover={{ scale: 1.05 }}
@@ -245,7 +213,7 @@ const QuickStart = () => {
                 >
                   <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
                   <Github className="w-5 h-5 relative z-10" />
-                  <span className="relative z-10">View on GitHub</span>
+                  <span className="relative z-10">{quickStartCTA.secondaryButton.text}</span>
                 </motion.a>
               </div>
 

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, Play, Sparkles } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
+import { heroData } from '@/data/hero'
 
 const Hero = () => {
   const containerVariants = {
@@ -105,7 +106,7 @@ const Hero = () => {
                 >
                   <Sparkles className="w-4 h-4 mr-2 text-blue-600 group-hover:text-blue-700" />
                 </motion.div>
-                <span className="text-gray-700 group-hover:text-gray-900">Backend-as-a-Service Platform</span>
+                <span className="text-gray-700 group-hover:text-gray-900">{heroData.badge.text}</span>
               </Badge>
             </motion.div>
 
@@ -114,7 +115,7 @@ const Hero = () => {
               variants={itemVariants}
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 lg:mb-8 leading-[1.1] tracking-tight"
             >
-              <span className="block text-gray-900 mb-2">Build APIs</span>
+              <span className="block text-gray-900 mb-2">{heroData.headline.line1}</span>
               <motion.span 
                 className="block bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent"
                 animate={{
@@ -129,7 +130,7 @@ const Hero = () => {
                   backgroundSize: '200% 100%',
                 }}
               >
-                Effortlessly
+                {heroData.headline.line2}
               </motion.span>
             </motion.h1>
 
@@ -138,10 +139,10 @@ const Hero = () => {
               variants={itemVariants}
               className="text-lg sm:text-xl md:text-2xl text-gray-600 mb-8 lg:mb-10 leading-relaxed font-medium"
             >
-              A powerful backend tool that helps developers{' '}
-              <span className="text-gray-900 font-semibold">start and scale</span> their backend with ease.
+              {heroData.subheadline.text}{' '}
+              <span className="text-gray-900 font-semibold">{heroData.subheadline.highlight}</span> {heroData.subheadline.additional.split('. ')[0]}.
               <br className="hidden sm:block" />
-              <span className="text-gray-700"> Eliminate boilerplate code and accelerate backend development.</span>
+              <span className="text-gray-700"> {heroData.subheadline.additional.split('. ').slice(1).join('. ')}</span>
             </motion.p>
 
             {/* Enhanced CTA Buttons */}
@@ -150,7 +151,7 @@ const Hero = () => {
               className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 lg:gap-5"
             >
               <motion.a
-                href="https://docs.bousalih.com/docs/bsh-engine/installation"
+                href={heroData.cta.primary.href}
                 target="_blank"
                 className="group relative px-8 lg:px-10 py-4 lg:py-5 bg-gradient-to-r from-gray-900 to-gray-800 text-white rounded-2xl font-semibold text-base lg:text-lg flex items-center space-x-3 overflow-hidden shadow-2xl shadow-gray-900/30 hover:shadow-gray-900/50 transition-all duration-300 w-full sm:w-auto justify-center"
                 whileHover={{ scale: 1.05, y: -2 }}
@@ -163,7 +164,7 @@ const Hero = () => {
               </motion.a>
               
               <motion.a
-                href="https://docs.bousalih.com"
+                href={heroData.cta.secondary.href}
                 target="_blank"
                 className="group px-8 lg:px-10 py-4 lg:py-5 glass text-gray-900 rounded-2xl font-semibold text-base lg:text-lg flex items-center space-x-3 hover:bg-white hover:shadow-xl hover:shadow-gray-200/50 transition-all duration-300 border-2 border-gray-300/80 hover:border-gray-400 w-full sm:w-auto justify-center"
                 whileHover={{ scale: 1.05, y: -2 }}
@@ -173,7 +174,7 @@ const Hero = () => {
                   <Play className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
                   <div className="absolute inset-0 bg-blue-500/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
-                <span>View Documentation</span>
+                <span>{heroData.cta.secondary.text}</span>
               </motion.a>
             </motion.div>
           </div>
@@ -191,8 +192,8 @@ const Hero = () => {
               {/* Screenshot Image */}
               <div className="relative">
                 <img
-                  src="/bsgengine.png"
-                  alt="BshEngine Screenshot"
+                  src={heroData.image.src}
+                  alt={heroData.image.alt}
                   className="w-full h-auto object-contain"
                   width="566"
                   height="292"

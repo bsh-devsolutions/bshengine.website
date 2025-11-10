@@ -1,28 +1,9 @@
 import { motion } from 'framer-motion'
 import { Github, Book, Mail, ExternalLink } from 'lucide-react'
+import { footerLinks, socialLinks, footerBrand, footerBottomLinks } from '@/data/footer'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
-
-  const links = {
-    product: [
-      { name: 'Features', href: '#features' },
-      { name: 'Documentation', href: 'https://docs.bousalih.com', external: true },
-      { name: 'API Reference', href: 'https://docs.bousalih.com/docs/bsh-engine/api', external: true },
-      { name: 'Quick Start', href: '#quick-start' },
-    ],
-    resources: [
-      { name: 'GitHub', href: 'https://github.com/bshgenerator', external: true },
-      { name: 'Docker Hub', href: 'https://hub.docker.com/r/bshg/engine', external: true },
-      { name: 'Postman Collection', href: 'https://www.postman.com/bsh-engine', external: true },
-      { name: 'TypeScript SDK', href: 'https://docs.bousalih.com/docs/bsh-engine/sdk', external: true },
-    ],
-    company: [
-      { name: 'About', href: '#', external: false },
-      { name: 'Blog', href: '#', external: false },
-      { name: 'Contact', href: 'mailto:bousalih.hamza.bsh@gmail.com', external: false },
-    ],
-  }
 
   return (
     <footer className="relative border-t border-gray-200 bg-gray-50">
@@ -36,50 +17,34 @@ const Footer = () => {
             >
               <div className="relative">
                 <img 
-                  src="/logo.svg" 
-                  alt="BSH Engine Logo" 
+                  src={footerBrand.logo} 
+                  alt={`${footerBrand.name} Logo`} 
                   className="w-8 h-8" 
                 />
               </div>
-              <span className="text-xl font-bold text-gradient">BSH Engine</span>
+              <span className="text-xl font-bold text-gradient">{footerBrand.name}</span>
             </a>
             <p className="text-gray-600 mb-6 max-w-md">
-              A powerful backend platform designed for developers who want to build APIs and data models effortlessly.
+              {footerBrand.description}
             </p>
             <div className="flex items-center space-x-4">
-              <motion.a
-                href="https://github.com/bshgenerator"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-lg glass hover:bg-gray-100 transition-all border border-gray-200"
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                whileTap={{ scale: 0.9 }}
-                aria-label="GitHub"
-              >
-                <Github className="w-5 h-5 text-gray-600 hover:text-gray-900 transition-colors" />
-              </motion.a>
-              <motion.a
-                href="https://docs.bousalih.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-lg glass hover:bg-gray-100 transition-all border border-gray-200"
-                whileHover={{ scale: 1.1, rotate: -5 }}
-                whileTap={{ scale: 0.9 }}
-                aria-label="Documentation"
-              >
-                <Book className="w-5 h-5 text-gray-600 hover:text-gray-900 transition-colors" />
-              </motion.a>
-              <motion.a
-                href="mailto:bousalih.hamza.bsh@gmail.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-lg glass hover:bg-gray-100 transition-all border border-gray-200"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                aria-label="Contact"
-              >
-                <Mail className="w-5 h-5 text-gray-600 hover:text-gray-900 transition-colors" />
-              </motion.a>
+              {socialLinks.map((social) => {
+                const IconComponent = social.icon === 'github' ? Github : social.icon === 'book' ? Book : Mail
+                return (
+                  <motion.a
+                    key={social.name}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-lg glass hover:bg-gray-100 transition-all border border-gray-200"
+                    whileHover={{ scale: 1.1, rotate: social.icon === 'book' ? -5 : 5 }}
+                    whileTap={{ scale: 0.9 }}
+                    aria-label={social.ariaLabel}
+                  >
+                    <IconComponent className="w-5 h-5 text-gray-600 hover:text-gray-900 transition-colors" />
+                  </motion.a>
+                )
+              })}
             </div>
           </div>
 
@@ -87,7 +52,7 @@ const Footer = () => {
           <div>
             <h3 className="text-gray-900 font-semibold mb-4">Product</h3>
             <ul className="space-y-3">
-              {links.product.map((link, index) => (
+              {footerLinks.product.map((link, index) => (
                 <li key={index}>
                   <a
                     href={link.href}
@@ -107,7 +72,7 @@ const Footer = () => {
           <div>
             <h3 className="text-gray-900 font-semibold mb-4">Resources</h3>
             <ul className="space-y-3">
-              {links.resources.map((link, index) => (
+              {footerLinks.resources.map((link, index) => (
                 <li key={index}>
                   <a
                     href={link.href}
@@ -127,7 +92,7 @@ const Footer = () => {
           <div>
             <h3 className="text-gray-900 font-semibold mb-4">Company</h3>
             <ul className="space-y-3">
-              {links.company.map((link, index) => (
+              {footerLinks.company.map((link, index) => (
                 <li key={index}>
                   <a
                     href={link.href}
@@ -148,16 +113,16 @@ const Footer = () => {
         <div className="border-t border-gray-200 pt-8">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
             <p className="text-gray-600 text-sm">
-              © {currentYear} BSH Engine. All rights reserved.
+              © {currentYear} {footerBrand.name}. All rights reserved.
             </p>
             <div className="flex items-center space-x-6 text-sm text-gray-600">
-              <a href="#" className="hover:text-gray-900 transition-colors">
-                Privacy Policy
+              <a href={footerBottomLinks.privacy.href} className="hover:text-gray-900 transition-colors">
+                {footerBottomLinks.privacy.name}
               </a>
-              <a href="#" className="hover:text-gray-900 transition-colors">
-                Terms of Service
+              <a href={footerBottomLinks.terms.href} className="hover:text-gray-900 transition-colors">
+                {footerBottomLinks.terms.name}
               </a>
-              <span className="text-gray-400">v1.0.0</span>
+              <span className="text-gray-400">{footerBottomLinks.version}</span>
             </div>
           </div>
         </div>
