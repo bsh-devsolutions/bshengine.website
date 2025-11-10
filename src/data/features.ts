@@ -10,6 +10,12 @@ import {
   Upload,
   GitMergeIcon,
   LucideIcon,
+  KeyRound,
+  Boxes,
+  Package,
+  RefreshCcw,
+  CombineIcon,
+  WifiSyncIcon,
 } from 'lucide-react'
 import { vars } from '.'
 
@@ -21,11 +27,7 @@ export interface Feature {
   iconBg: string
   category: string
   badge?: string
-}
-
-export interface ComingSoonFeature {
-  title: string
-  link: string
+  link?: string
 }
 
 export const features: Feature[] = [
@@ -36,6 +38,7 @@ export const features: Feature[] = [
     color: 'from-blue-500 to-indigo-600',
     iconBg: 'from-blue-50 to-indigo-50',
     category: 'Infrastructure',
+    link: vars.bshEngineDocs + '/installation',
   },
   {
     icon: Layers,
@@ -44,14 +47,17 @@ export const features: Feature[] = [
     color: 'from-purple-500 to-pink-600',
     iconBg: 'from-purple-50 to-pink-50',
     category: 'Core',
+    link: vars.bshEngineDocs + '/modeling',
   },
   {
-    icon: Code2,
-    title: 'Comprehensive REST API',
-    description: 'Full CRUD operations with advanced filtering, pagination, and standardized JSON responses.',
-    color: 'from-emerald-500 to-teal-600',
-    iconBg: 'from-emerald-50 to-teal-50',
-    category: 'API',
+    icon: Boxes,
+    title: 'Derived Entities',
+    description: 'Create computed and aggregated entities from your existing data models.',
+    color: 'from-indigo-500 to-blue-600',
+    iconBg: 'from-indigo-50 to-blue-50',
+    category: 'Core',
+    badge: 'Upcoming',
+    link: vars.bshEngineDocs + '/modeling/deriveds',
   },
   {
     icon: Key,
@@ -60,14 +66,7 @@ export const features: Feature[] = [
     color: 'from-amber-500 to-orange-600',
     iconBg: 'from-amber-50 to-orange-50',
     category: 'Security',
-  },
-  {
-    icon: Search,
-    title: 'Advanced Search (BSH Search)',
-    description: 'Logical and comparison filters with TypeScript type-safe query builder.',
-    color: 'from-cyan-500 to-blue-600',
-    iconBg: 'from-cyan-50 to-blue-50',
-    category: 'API',
+    link: vars.bshEngineDocs + '/auth',
   },
   {
     icon: Shield,
@@ -76,6 +75,35 @@ export const features: Feature[] = [
     color: 'from-red-500 to-rose-600',
     iconBg: 'from-red-50 to-rose-50',
     category: 'Security',
+    link: vars.bshEngineDocs + '/security',
+  },
+  {
+    icon: KeyRound,
+    title: 'Api Keys',
+    description: 'Secure API key management for programmatic access to your backend services.',
+    color: 'from-slate-500 to-gray-600',
+    iconBg: 'from-slate-50 to-gray-50',
+    category: 'Security',
+    badge: 'In Development',
+    link: vars.bshEngineDocs + '/security/api-keys',
+  },
+  {
+    icon: Code2,
+    title: 'Comprehensive REST API',
+    description: 'Full CRUD operations with advanced filtering, pagination, and standardized JSON responses.',
+    color: 'from-emerald-500 to-teal-600',
+    iconBg: 'from-emerald-50 to-teal-50',
+    category: 'API',
+    link: vars.bshEngineDocs + '/api',
+  },
+  {
+    icon: Search,
+    title: 'Advanced Search (BSH Search)',
+    description: 'Logical and comparison filters with TypeScript type-safe query builder.',
+    color: 'from-cyan-500 to-blue-600',
+    iconBg: 'from-cyan-50 to-blue-50',
+    category: 'API',
+    link: vars.bshEngineDocs + '/search',
   },
   {
     icon: Upload,
@@ -84,6 +112,7 @@ export const features: Feature[] = [
     color: 'from-violet-500 to-purple-600',
     iconBg: 'from-violet-50 to-purple-50',
     category: 'Storage',
+    link: vars.bshEngineDocs + '/files',
   },
   {
     icon: Mail,
@@ -92,6 +121,7 @@ export const features: Feature[] = [
     color: 'from-sky-500 to-cyan-600',
     iconBg: 'from-sky-50 to-cyan-50',
     category: 'Communication',
+    link: vars.bshEngineDocs + '/mailing',
   },
   {
     icon: GitMergeIcon,
@@ -100,46 +130,56 @@ export const features: Feature[] = [
     color: 'from-fuchsia-500 to-pink-600',
     iconBg: 'from-fuchsia-50 to-pink-50',
     category: 'Automation',
-    badge: 'Beta',
+    badge: 'In Development',
+    link: vars.bshEngineDocs + '/triggers',
+  },
+  {
+    icon: WifiSyncIcon,
+    title: 'WebSocket Support',
+    description: 'Real-time bidirectional communication for live updates and interactive applications.',
+    color: 'from-green-500 to-emerald-600',
+    iconBg: 'from-green-50 to-emerald-50',
+    category: 'Communication',
+    badge: 'Upcoming',
+    link: vars.bshEngineDocs + '/websocket',
+  },
+  {
+    icon: RefreshCcw,
+    title: 'Caching',
+    description: 'High-performance caching layer to accelerate data access and reduce database load.',
+    color: 'from-orange-500 to-red-600',
+    iconBg: 'from-orange-50 to-red-50',
+    category: 'Performance',
+    badge: 'Upcoming',
+    link: vars.bshEngineDocs + '/caching',
+  },
+  {
+    icon: Package,
+    title: 'Packaging',
+    description: 'Package and distribute your backend configurations and customizations.',
+    color: 'from-teal-500 to-cyan-600',
+    iconBg: 'from-teal-50 to-cyan-50',
+    category: 'Tools',
+    badge: 'Upcoming',
+    link: vars.bshEngineDocs + '/packaging',
+  },
+  {
+    icon: CombineIcon,
+    title: 'BSH Engine SDK',
+    description: 'Official TypeScript SDK for seamless integration with your applications.',
+    color: 'from-rose-500 to-pink-600',
+    iconBg: 'from-rose-50 to-pink-50',
+    category: 'Tools',
+    badge: 'Upcoming',
+    link: vars.bshEngineDocs + '/sdk',
   },
   {
     icon: Zap,
     title: 'Developer Experience',
-    description: 'Postman Collection, TypeScript SDK (planned), RESTful type-safe APIs, and full documentation.',
+    description: 'Postman Collection, TypeScript SDK, RESTful type-safe APIs, and full documentation.',
     color: 'from-yellow-500 to-amber-600',
     iconBg: 'from-yellow-50 to-amber-50',
     category: 'Tools',
+    link: vars.bshEngineDocs,
   },
 ]
-
-export const comingSoonFeatures: ComingSoonFeature[] = [
-  {
-    title: 'Api Keys',
-    link: vars.bshEngineDocs + '/security/api-keys',
-  },
-  {
-    title: 'Triggers',
-    link: vars.bshEngineDocs + '/triggers',
-  },
-  {
-    title: 'WebSocket Support',
-    link: vars.bshEngineDocs + '/websocket',
-  },
-  {
-    title: 'Caching',
-    link: vars.bshEngineDocs + '/caching',
-  },
-  {
-    title: 'Derived Entities',
-    link: vars.bshEngineDocs + '/modeling/deriveds',
-  },
-  {
-    title: 'Packaging',
-    link: vars.bshEngineDocs + '/packaging',
-  },
-  {
-    title: 'BSH Engine SDK',
-    link: vars.bshEngineDocs + '/sdk',
-  },
-]
-

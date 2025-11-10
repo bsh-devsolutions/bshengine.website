@@ -32,7 +32,7 @@ export interface HeroData {
 
 export const heroData: HeroData = {
   badge: {
-    text: 'Backend-as-a-Service Platform',
+    text: 'Backend Engine',
     icon: '✨',
   },
   headline: {
@@ -40,9 +40,9 @@ export const heroData: HeroData = {
     line2: 'Effortlessly',
   },
   subheadline: {
-    text: 'A powerful backend tool that helps developers',
+    text: 'A powerful backend tool that helps you',
     highlight: 'start and scale',
-    additional: 'their backend with ease. Eliminate boilerplate code and accelerate backend development.',
+    additional: 'your backend with ease. Eliminate boilerplate code and accelerate your development.',
   },
   cta: {
     primary: {

@@ -24,7 +24,7 @@ const Benefits = () => {
   }
 
   return (
-    <section id="benefits" className="relative py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section id="benefits" className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-gradient-to-br from-amber-100/30 to-orange-100/30 rounded-full blur-3xl" />
@@ -41,14 +41,14 @@ const Benefits = () => {
           className="text-center mb-20"
         >
           <Badge variant="outline" className="mb-6 px-4 py-1.5 text-sm font-medium border-gray-300 text-gray-600 bg-white/50">
-            Why Choose Us
+            Why BSH Engine?
           </Badge>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
-            <span className="text-gray-900">Why Choose </span>
+            <span className="text-gray-900">Why To Use </span>
             <span className="text-gradient bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">BSH Engine</span>
           </h2>
           <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Built for developers who want to ship faster, not configure more
+            Built by developers for developers who want to ship faster, not configure more
           </p>
         </motion.div>
 
