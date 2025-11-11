@@ -1,62 +1,74 @@
 import { vars } from "."
+import { Linkedin, LucideIcon, Package } from "lucide-react"
+import { Github } from "lucide-react"
+import { Book } from "lucide-react"
 
 export interface FooterLink {
     name: string
-    href: string
-    external?: boolean
-}
-
-export interface FooterLinks {
-    product: FooterLink[]
-    resources: FooterLink[]
-    company: FooterLink[]
+    links: {
+        name: string
+        href: string
+        external?: boolean
+    }[]
 }
 
 export interface SocialLink {
     name: string
     href: string
-    icon: string
+    icon: LucideIcon
     ariaLabel: string
 }
 
-export const footerLinks: FooterLinks = {
-    product: [
-        { name: 'Features', href: '#features' },
-        { name: 'Documentation', href: vars.bshEngineDocs, external: true },
-        { name: 'API Reference', href: vars.bshEngineDocs + '/api', external: true },
-        { name: 'Quick Start', href: vars.bshEngineDocs + '/installation' },
-    ],
-    resources: [
-        { name: 'GitHub', href: vars.github, external: true },
-        { name: 'Docker Hub', href: vars.dockerHub, external: true },
-        { name: 'Postman Collection', href: vars.postmanCollection, external: true },
-        { name: 'TypeScript SDK', href: vars.bshEngineDocs + '/sdk', external: true },
-    ],
-    company: [
-        { name: 'About', href: vars.author, external: true },
-        { name: 'Blog', href: vars.bshEngineDocs + '/blog', external: true },
-        { name: 'Contact', href: vars.contact, external: true },
-    ],
-}
+export const footerLinks: FooterLink[] = [
+    {
+        name: 'Quick Links',
+        links: [
+            { name: 'Documentation', href: vars.bshEngineDocs, external: true },
+            { name: 'API Reference', href: vars.bshEngineDocs + '/api', external: true },
+            { name: 'Learn from Blogs', href: vars.documentation + '/blog', external: true },
+        ],
+    },
+    {
+        name: 'Resources',
+        links: [
+            { name: 'GitHub', href: vars.github, external: true },
+            { name: 'Docker Hub', href: vars.dockerHub, external: true },
+            { name: 'Postman Collection', href: vars.postmanCollection, external: true },
+        ],
+    },
+    {
+        name: 'Let\'s Talk',
+        links: [
+            { name: 'About', href: vars.author, external: true },
+            { name: 'Contact', href: vars.contact, external: true },
+        ],
+    },
+]
 
 export const socialLinks: SocialLink[] = [
     {
-        name: 'GitHub',
-        href: vars.github,
-        icon: 'github',
-        ariaLabel: 'GitHub',
+        name: 'LinkedIn',
+        href: vars.linkedin,
+        icon: Linkedin,
+        ariaLabel: 'LinkedIn',
     },
     {
         name: 'Documentation',
         href: vars.documentation,
-        icon: 'book',
+        icon: Book,
         ariaLabel: 'Documentation',
     },
     {
-        name: 'Contact',
-        href: vars.contact,
-        icon: 'mail',
-        ariaLabel: 'Contact',
+        name: 'GitHub',
+        href: vars.github,
+        icon: Github,
+        ariaLabel: 'GitHub',
+    },
+    {
+        name: 'Docker',
+        href: vars.dockerHub,
+        icon: Package,
+        ariaLabel: 'Docker',
     },
 ]
 

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Github, Book, Mail, ExternalLink } from 'lucide-react'
+import { ExternalLink } from 'lucide-react'
 import { footerLinks, socialLinks, footerBrand, footerBottomLinks } from '@/data/footer'
 
 const Footer = () => {
@@ -29,7 +29,6 @@ const Footer = () => {
             </p>
             <div className="flex items-center space-x-4">
               {socialLinks.map((social) => {
-                const IconComponent = social.icon === 'github' ? Github : social.icon === 'book' ? Book : Mail
                 return (
                   <motion.a
                     key={social.name}
@@ -37,22 +36,22 @@ const Footer = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2 rounded-lg glass hover:bg-gray-100 transition-all border border-gray-200"
-                    whileHover={{ scale: 1.1, rotate: social.icon === 'book' ? -5 : 5 }}
+                    whileHover={{ scale: 1.1, rotate: 5 }}
                     whileTap={{ scale: 0.9 }}
                     aria-label={social.ariaLabel}
                   >
-                    <IconComponent className="w-5 h-5 text-gray-600 hover:text-gray-900 transition-colors" />
+                    <social.icon className="w-5 h-5 text-gray-600 hover:text-gray-900 transition-colors" />
                   </motion.a>
                 )
               })}
             </div>
           </div>
 
-          {/* Product Links */}
-          <div>
-            <h3 className="text-gray-900 font-semibold mb-4">Product</h3>
+          {footerLinks.map((group, index) =>
+            <div key={index}>
+            <h3 className="text-gray-900 font-semibold mb-4">{group.name}</h3>
             <ul className="space-y-3">
-              {footerLinks.product.map((link, index) => (
+              {group.links.map((link, index) => (
                 <li key={index}>
                   <a
                     href={link.href}
@@ -66,47 +65,8 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
-          </div>
-
-          {/* Resources Links */}
-          <div>
-            <h3 className="text-gray-900 font-semibold mb-4">Resources</h3>
-            <ul className="space-y-3">
-              {footerLinks.resources.map((link, index) => (
-                <li key={index}>
-                  <a
-                    href={link.href}
-                    target={link.external ? '_blank' : '_self'}
-                    rel={link.external ? 'noopener noreferrer' : undefined}
-                    className="text-gray-600 hover:text-gray-900 transition-colors text-sm flex items-center space-x-1"
-                  >
-                    <span>{link.name}</span>
-                    {link.external && <ExternalLink className="w-3 h-3" />}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company Links */}
-          <div>
-            <h3 className="text-gray-900 font-semibold mb-4">Company</h3>
-            <ul className="space-y-3">
-              {footerLinks.company.map((link, index) => (
-                <li key={index}>
-                  <a
-                    href={link.href}
-                    target={link.external ? '_blank' : '_self'}
-                    rel={link.external ? 'noopener noreferrer' : undefined}
-                    className="text-gray-600 hover:text-gray-900 transition-colors text-sm flex items-center space-x-1"
-                  >
-                    <span>{link.name}</span>
-                    {link.external && <ExternalLink className="w-3 h-3" />}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+            </div>
+          )}
         </div>
 
         {/* Bottom Bar */}

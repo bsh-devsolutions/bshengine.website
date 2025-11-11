@@ -99,7 +99,7 @@ export const features: Feature[] = [
   {
     icon: Search,
     title: 'Advanced Search (BSH Search)',
-    description: 'Logical and comparison filters with TypeScript type-safe query builder.',
+    description: 'A powerful search endpoint for your entities with advanced filtering and sorting capabilities.',
     color: 'from-cyan-500 to-blue-600',
     iconBg: 'from-cyan-50 to-blue-50',
     category: 'API',
@@ -156,7 +156,7 @@ export const features: Feature[] = [
   {
     icon: Package,
     title: 'Packaging',
-    description: 'Package and distribute your backend configurations and customizations.',
+    description: 'Package and distribute your backend as portable package you can reinstall with ease.',
     color: 'from-teal-500 to-cyan-600',
     iconBg: 'from-teal-50 to-cyan-50',
     category: 'Tools',
@@ -166,7 +166,7 @@ export const features: Feature[] = [
   {
     icon: CombineIcon,
     title: 'BSH Engine SDK',
-    description: 'Official TypeScript SDK for seamless integration with your applications.',
+    description: 'Libraries and tools for seamless integration with your applications.',
     color: 'from-rose-500 to-pink-600',
     iconBg: 'from-rose-50 to-pink-50',
     category: 'Tools',
