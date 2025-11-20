@@ -170,7 +170,7 @@ export const features: Feature[] = [
     color: 'from-rose-500 to-pink-600',
     iconBg: 'from-rose-50 to-pink-50',
     category: 'Tools',
-    badge: 'Upcoming',
+    badge: 'In Development',
     link: vars.bshEngineDocs + '/sdk',
   },
   {
